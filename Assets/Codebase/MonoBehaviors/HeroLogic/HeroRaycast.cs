@@ -41,7 +41,7 @@ namespace Codebase.HeroLogic
 
             if (Input.GetButtonDown(_interactButton) && _object != null)
             {
-                _object.Interact();
+                _object.Interact(null);
             }
         }
 
