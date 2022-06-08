@@ -1,38 +1,49 @@
-﻿using UltEvents;
+﻿using Lean.Transition;
+using UltEvents;
 using UnityEngine;
 
 namespace Codebase.InventoryLogic
 {
     public class InventoryBehavior : MonoBehaviour
     {
-        [SerializeField] private UltEvent _openEvent;
-        [SerializeField] private UltEvent _closeEvent;
+        [SerializeField] private GameObject _inventory;
 
-        [SerializeField] private UltEvent _onCloseEvent;
+        [Space]
+
+        [SerializeField] private LeanManualAnimation _openAnimation;
+        [SerializeField] private LeanManualAnimation _closeAnimation;
 
         public void Open()
         {
-            _openEvent.Invoke();
+            _inventory.SetActive(true);
+
+            _openAnimation.BeginTransitions();
+
+            ActiveCursor();
+            PauseGame();
         }
 
         public void Close()
         {
-            _closeEvent.Invoke();
+            _closeAnimation.BeginTransitions();
+
+            _inventory.SetActive(false);
         }
 
         public void OnClose()
         {
-            _onCloseEvent.Invoke();
+            LockCursor();
+            ResumeGame();
         }
 
         // Это временное решение. В будущем будет сервис
 
-        public void Pause()
+        public void PauseGame()
         {
             Time.timeScale = 0;
         }
 
-        public void Resume()
+        public void ResumeGame()
         {
             Time.timeScale = 1;
         }
