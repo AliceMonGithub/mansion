@@ -6,7 +6,7 @@ namespace Codebase.HidingObjectLogic
     public class HidingObject : Interactable
     {
         [SerializeField] private HidingObjectBehavior _hideBehavior;
-        
+
         private void OnValidate()
         {
             if (_hideBehavior == null)
