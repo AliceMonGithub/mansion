@@ -25,7 +25,9 @@ namespace Codebase.HeroLogic
 
         [SerializeField] private Transform _point;
 
+        [Space]
 
+        [SerializeField] private Hero _hero;
 
         private Interactable _object;
         private Interactable _recent;
@@ -41,7 +43,7 @@ namespace Codebase.HeroLogic
 
             if (Input.GetButtonDown(_interactButton) && _object != null)
             {
-                _object.Interact(null);
+                _object.Interact(_hero);
             }
         }
 

@@ -12,8 +12,7 @@ namespace Codebase.HeroLogic
         [SerializeField] private float _smooth;
 
         [Header("Components")]
-        [SerializeField] private Transform _transform;
-        [SerializeField] private CharacterController _characterController;
+        [SerializeField] private Hero _hero;
 
         private MovementInput _input;
 
@@ -26,7 +25,10 @@ namespace Codebase.HeroLogic
             _input = input;
         }
 
-        private Vector3 MoveDirection => (_transform.forward * _axis.y + _transform.right * _axis.x);
+        private Vector3 MoveDirection => (Transform.forward * _axis.y + Transform.right * _axis.x);
+
+        public Transform Transform => _hero.Transform;
+        public CharacterController CharacterController => _hero.CharacterController;
 
         private void Update()
         {
@@ -37,16 +39,6 @@ namespace Codebase.HeroLogic
         {
             _speed = Mathf.Clamp(_speed, 0, Mathf.Infinity);
             _smooth = Mathf.Clamp(_smooth, 0, Mathf.Infinity);
-
-            if(_transform == null)
-            {
-                _transform = transform;
-            }
-
-            if(_characterController == null)
-            {
-                _characterController = GetComponent<CharacterController>();
-            }
         }
 
         private void Move()
@@ -60,7 +52,7 @@ namespace Codebase.HeroLogic
         {
             var moveVelosity = _speed * Time.deltaTime * MoveDirection;
 
-            _characterController.Move(moveVelosity);
+            CharacterController.Move(moveVelosity);
         }
 
         private void SmoothAxis()

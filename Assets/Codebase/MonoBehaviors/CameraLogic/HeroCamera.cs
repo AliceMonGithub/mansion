@@ -1,4 +1,5 @@
-﻿using Codebase.Services.InputService;
+﻿using Codebase.HeroLogic;
+using Codebase.Services.InputService;
 using UnityEngine;
 using Zenject;
 
@@ -11,8 +12,11 @@ namespace Codebase.CameraLogic
         [SerializeField] private float _smooth;
 
         [Header("Components")]
-        [SerializeField] private Transform _hero;
-        [SerializeField] private Transform _camera;
+        [SerializeField] private Transform _cameraTransform;
+
+        [Space]
+
+        [SerializeField] private Hero _hero;
 
         private ViewInput _input;
 
@@ -27,6 +31,8 @@ namespace Codebase.CameraLogic
             _input = input;
         }
 
+        public Transform HeroTransform => _hero.Transform;
+
         private void Update()
         {
             Move();
@@ -37,14 +43,9 @@ namespace Codebase.CameraLogic
             _sensitivity = Mathf.Clamp(_sensitivity, 0, Mathf.Infinity);
             _smooth = Mathf.Clamp(_smooth, 0, Mathf.Infinity);
 
-            if(_hero == null)
+            if(_cameraTransform == null)
             {
-                _hero = transform;
-            }
-
-            if(_camera == null)
-            {
-                _camera = GetComponentInChildren<Camera>().transform;
+                _cameraTransform = GetComponentInChildren<Camera>().transform;
             }
         }
 
@@ -61,7 +62,7 @@ namespace Codebase.CameraLogic
         {
             var delta = _axis.x * _sensitivity * Time.deltaTime;
 
-            _hero.Rotate(Vector3.up, delta);
+            HeroTransform.Rotate(Vector3.up, delta);
         }
 
         private void RotateHero()
@@ -70,7 +71,7 @@ namespace Codebase.CameraLogic
 
             _xRotation = Mathf.Clamp(_xRotation, -90, 90);
 
-            _camera.localEulerAngles = Vector3.right * _xRotation;
+            _cameraTransform.localEulerAngles = Vector3.right * _xRotation;
         }
 
         private void SmoothAxis()
