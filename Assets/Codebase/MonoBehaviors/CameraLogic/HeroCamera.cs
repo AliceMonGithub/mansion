@@ -60,14 +60,14 @@ namespace Codebase.CameraLogic
 
         private void RotateCamera()
         {
-            var delta = _axis.x * _sensitivity * Time.deltaTime;
+            var delta = _axis.x * _sensitivity;
 
             HeroTransform.Rotate(Vector3.up, delta);
         }
 
         private void RotateHero()
         {
-            _xRotation -= _axis.y * _sensitivity * Time.deltaTime;
+            _xRotation -= _axis.y * _sensitivity;
 
             _xRotation = Mathf.Clamp(_xRotation, -90, 90);
 
