@@ -58,30 +58,30 @@ namespace Codebase.CameraLogic
         {
             SmoothAxis();
 
-            RotateCamera();
             RotateHero();
+            RotateCamera();
 
         }
 
-        private void RotateCamera()
+        private void RotateHero()
         {
             var delta = _axis.x * _sensitivity * Time.deltaTime;
 
             HeroTransform.Rotate(Vector3.up, delta);
         }
 
-        private void RotateHero()
+        private void RotateCamera()
         {
             _xRotation -= _axis.y * _sensitivity * Time.deltaTime;
 
-            _xRotation = Mathf.Clamp(_xRotation, -90, 90);
+            _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
 
             _cameraTransform.localEulerAngles = Vector3.right * _xRotation;
         }
 
         private void SmoothAxis()
         {
-            _axis = Vector2.SmoothDamp(_axis, _input.Axis.normalized, ref _axisVelosity, _smooth);
+            _axis = Vector2.SmoothDamp(_axis, _input.Axis, ref _axisVelosity, _smooth);
         }
     }
 }
