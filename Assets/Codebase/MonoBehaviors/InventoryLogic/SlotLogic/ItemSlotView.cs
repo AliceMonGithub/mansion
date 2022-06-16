@@ -9,6 +9,14 @@ namespace Codebase.InventoryLogic
     {
         [SerializeField] private Image _image;
 
+        private void OnValidate()
+        {
+            if(_image == null)
+            {
+                _image = GetComponent<Image>();
+            }
+        }
+
         public void Initialize(Item item)
         {
             Render(item);

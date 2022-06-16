@@ -26,6 +26,14 @@ namespace Codebase.InventoryLogic
             _inventory.ItemsCountChanged -= Render;
         }
 
+        private void OnValidate()
+        {
+            if(_inventory == null)
+            {
+                _inventory = FindObjectOfType<HeroInventory>();
+            }
+        }
+
         private void Render(List<Item> items)
         {
             var slotIndex = 0;
