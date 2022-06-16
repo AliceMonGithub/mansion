@@ -9,6 +9,14 @@ namespace Codebase.InventoryLogic
 
         private Item _item;
 
+        private void OnValidate()
+        {
+            if(_inventory == null)
+            {
+                _inventory = FindObjectOfType<HeroInventory>();
+            }
+        }
+
         public void Initialize(Item item)
         {
             _item = item;

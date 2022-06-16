@@ -54,6 +54,11 @@ namespace Codebase.HeroLogic
                 _point = transform;
             }
 
+            if(_hero == null)
+            {
+                _hero = GetComponent<Hero>();
+            }
+
             _distance = Mathf.Clamp(_distance, 0, Mathf.Infinity);
         }
 

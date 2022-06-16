@@ -13,6 +13,14 @@ namespace Codebase.InventoryLogic
         [SerializeField] private LeanManualAnimation _openAnimation;
         [SerializeField] private LeanManualAnimation _closeAnimation;
 
+        private void OnValidate()
+        {
+            if(_inventory == null)
+            {
+                _inventory = gameObject;
+            }
+        }
+
         public void Open()
         {
             _inventory.SetActive(true);
@@ -27,33 +35,30 @@ namespace Codebase.InventoryLogic
         {
             _closeAnimation.BeginTransitions();
 
-            _inventory.SetActive(false);
-        }
-
-        public void OnClose()
-        {
             LockCursor();
             ResumeGame();
+
+            _inventory.SetActive(false);
         }
 
         // Это временное решение. В будущем будет сервис
 
-        public void PauseGame()
+        private void PauseGame()
         {
             Time.timeScale = 0;
         }
 
-        public void ResumeGame()
+        private void ResumeGame()
         {
             Time.timeScale = 1;
         }
 
-        public void ActiveCursor()
+        private void ActiveCursor()
         {
             Cursor.lockState = CursorLockMode.None;
         }
 
-        public void LockCursor()
+        private void LockCursor()
         {
             Cursor.lockState = CursorLockMode.Locked;
         }

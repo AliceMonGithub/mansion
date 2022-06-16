@@ -5,12 +5,23 @@ namespace Codebase.InventoryLogic
 {
     public class ItemSlot : MonoBehaviour
     {
-        [SerializeField] private Item _item;
-
-        [Space]
-
         [SerializeField] private ItemSlotView _view;
         [SerializeField] private ItemSlotBehavior _behavior;
+
+        private Item _item;
+
+        private void OnValidate()
+        {
+            if(_view == null)
+            {
+                _view = GetComponent<ItemSlotView>();
+            }
+
+            if (_behavior == null)
+            {
+                _behavior = GetComponent<ItemSlotBehavior>();
+            }
+        }
 
         public void Initialize(Item item)
         {

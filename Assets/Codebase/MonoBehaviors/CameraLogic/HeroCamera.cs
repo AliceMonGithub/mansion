@@ -47,6 +47,11 @@ namespace Codebase.CameraLogic
             {
                 _cameraTransform = GetComponentInChildren<Camera>().transform;
             }
+
+            if(_hero == null)
+            {
+                _hero = GetComponent<Hero>();
+            }
         }
 
         private void Move()
@@ -60,14 +65,14 @@ namespace Codebase.CameraLogic
 
         private void RotateCamera()
         {
-            var delta = _axis.x * _sensitivity;
+            var delta = _axis.x * _sensitivity * Time.deltaTime;
 
             HeroTransform.Rotate(Vector3.up, delta);
         }
 
         private void RotateHero()
         {
-            _xRotation -= _axis.y * _sensitivity;
+            _xRotation -= _axis.y * _sensitivity * Time.deltaTime;
 
             _xRotation = Mathf.Clamp(_xRotation, -90, 90);
 

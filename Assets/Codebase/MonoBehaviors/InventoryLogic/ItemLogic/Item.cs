@@ -15,7 +15,7 @@ namespace Codebase.InventoryLogic
 
         [Space]
 
-        [SerializeField] private ItemDrop _itemDrop;
+        [SerializeField] private ItemDrop _dropPrefab;
         [SerializeField] private ItemModel _itemModel;
         
         public string Name => _name;
@@ -23,7 +23,7 @@ namespace Codebase.InventoryLogic
 
         public Sprite Image => _image;
 
-        public ItemDrop ItemDrop => _itemDrop;
+        public ItemDrop DropPrefab => _dropPrefab;
         public ItemModel ItemModel => _itemModel;
     }
 }
