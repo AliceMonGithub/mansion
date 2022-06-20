@@ -24,6 +24,6 @@ namespace Codebase.InventoryLogic
         public Sprite Image => _image;
 
         public ItemDrop DropPrefab => _dropPrefab;
-        public ItemModel ItemModel => _itemModel;
+        public ItemModel ModelPrefab => _itemModel;
     }
 }

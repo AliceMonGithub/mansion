@@ -43,12 +43,12 @@ namespace Codebase.CameraLogic
             _sensitivity = Mathf.Clamp(_sensitivity, 0, Mathf.Infinity);
             _smooth = Mathf.Clamp(_smooth, 0, Mathf.Infinity);
 
-            if(_cameraTransform == null)
+            if (_cameraTransform == null)
             {
                 _cameraTransform = GetComponentInChildren<Camera>().transform;
             }
 
-            if(_hero == null)
+            if (_hero == null)
             {
                 _hero = GetComponent<Hero>();
             }

@@ -8,23 +8,25 @@ namespace Codebase.CrossfireLogic
 {
     public class CrossfireBehavior : MonoBehaviour
     {
-        [SerializeField] private UltEvent _onObjectEnterEvent;
-        [SerializeField] private UltEvent _onObjectExitEvent;
+        [SerializeField] private Color _pointerEnterColor = Color.black;
+        [SerializeField] private Color _pointerExitColor = Color.black;
+
+        [Space]
 
         [SerializeField] private Image _crossfireImage;
 
         [SerializeField] private HeroRaycast _heroRaycast;
 
-        private void OnEnable()
+        private void Update()
         {
-            _heroRaycast.OnObjectEnter += _onObjectEnterEvent.Invoke;
-            _heroRaycast.OnObjectExit += _onObjectExitEvent.Invoke;
-        }
-
-        private void OnDisable()
-        {
-            _heroRaycast.OnObjectEnter -= _onObjectEnterEvent.Invoke;
-            _heroRaycast.OnObjectExit -= _onObjectExitEvent.Invoke;
+            if(_heroRaycast.Object)
+            {
+                CrossfireColor(_pointerEnterColor);
+            }
+            else
+            {
+                CrossfireColor(_pointerExitColor);
+            }
         }
 
         private void OnValidate()
