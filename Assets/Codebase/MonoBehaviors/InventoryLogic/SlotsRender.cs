@@ -1,14 +1,13 @@
 ﻿using Codebase.HeroLogic;
-using System.Collections;
 using System.Collections.Generic;
-using UniRx;
 using UnityEngine;
 
 namespace Codebase.InventoryLogic
 {
-    public class ItemSlotsBehavior : MonoBehaviour
+    public class SlotsRender : MonoBehaviour
     {
         [SerializeField] private List<ItemSlot> _slots;
+        [SerializeField] private HandItemSlot _handSlot;
 
         [Space]
 
@@ -16,25 +15,28 @@ namespace Codebase.InventoryLogic
 
         private void OnEnable()
         {
-            Render(_inventory.Items);
+            RenderItemsSlots(_inventory.Items);
+            RenderHandSlot(_inventory.HandItem);
 
-            _inventory.ItemsCountChanged += Render;
+            _inventory.ItemsCountChanged += RenderItemsSlots;
+            _inventory.OnHandItemChanged += RenderHandSlot;
         }
 
         private void OnDisable()
         {
-            _inventory.ItemsCountChanged -= Render;
+            _inventory.ItemsCountChanged -= RenderItemsSlots;
+            _inventory.OnHandItemChanged -= RenderHandSlot;
         }
 
         private void OnValidate()
         {
-            if(_inventory == null)
+            if (_inventory == null)
             {
                 _inventory = FindObjectOfType<HeroInventory>();
             }
         }
 
-        private void Render(List<Item> items)
+        private void RenderItemsSlots(List<Item> items)
         {
             var slotIndex = 0;
 
@@ -48,9 +50,14 @@ namespace Codebase.InventoryLogic
             }
         }
 
+        private void RenderHandSlot(Item item)
+        {
+            _handSlot.Initialize(item);
+        }
+
         private void Clear()
         {
-            _slots.ForEach(slot => slot.Initialize(null)); // скорее всего временное решение
+            _slots.ForEach(slot => slot.Initialize(null));
         }
     }
 }

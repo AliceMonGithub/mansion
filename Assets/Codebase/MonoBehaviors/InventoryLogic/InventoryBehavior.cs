@@ -1,5 +1,4 @@
 ﻿using Lean.Transition;
-using UltEvents;
 using UnityEngine;
 
 namespace Codebase.InventoryLogic
