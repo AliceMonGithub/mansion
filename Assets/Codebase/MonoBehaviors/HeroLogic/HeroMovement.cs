@@ -42,7 +42,7 @@ namespace Codebase.HeroLogic
             _speed = Mathf.Clamp(_speed, 0, Mathf.Infinity);
             _smooth = Mathf.Clamp(_smooth, 0, Mathf.Infinity);
 
-            if(_hero == null)
+            if (_hero == null)
             {
                 _hero = GetComponent<Hero>();
             }
@@ -58,8 +58,6 @@ namespace Codebase.HeroLogic
         private void MoveHero()
         {
             var moveVelosity = _speed * Time.deltaTime * MoveDirection;
-
-            print(MoveDirection);
 
             CharacterController.Move(moveVelosity);
         }

@@ -1742,32 +1742,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 903f609cb0bb38243a1adcd65f3cec45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onObjectEnterEvent:
-    _PersistentCalls:
-    - _Target: {fileID: 1642597510}
-      _MethodName: CrossfireColor
-      _PersistentArguments:
-      - _Type: 10
-        _Int: 0
-        _String: 
-        _X: 0
-        _Y: 0
-        _Z: 0
-        _W: 0.8627451
-        _Object: {fileID: 0}
-  _onObjectExitEvent:
-    _PersistentCalls:
-    - _Target: {fileID: 1642597510}
-      _MethodName: CrossfireColor
-      _PersistentArguments:
-      - _Type: 10
-        _Int: 0
-        _String: 
-        _X: 0
-        _Y: 0
-        _Z: 0
-        _W: 0.39215687
-        _Object: {fileID: 0}
+  _pointerEnterColor: {r: 0, g: 0, b: 0, a: 1}
+  _pointerExitColor: {r: 0, g: 0, b: 0, a: 1}
   _crossfireImage: {fileID: 1642597511}
   _heroRaycast: {fileID: 1356944258}
 --- !u!114 &1642597511

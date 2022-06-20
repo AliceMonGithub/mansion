@@ -5,10 +5,10 @@ using static UnityEngine.EventSystems.PointerEventData;
 
 namespace Codebase.InventoryLogic
 {
-    public class ItemSlotBehavior : MonoBehaviour
+    public class HandItemSlotBehavior : MonoBehaviour
     {
         [SerializeField] private HeroInventory _inventory;
-        [SerializeField] private ItemSlot _slot;
+        [SerializeField] private HandItemSlot _slot;
 
         private Item _item;
 
@@ -31,7 +31,7 @@ namespace Codebase.InventoryLogic
 
             if (_slot == null)
             {
-                _slot = GetComponent<ItemSlot>();
+                _slot = GetComponent<HandItemSlot>();
             }
         }
 
@@ -42,23 +42,26 @@ namespace Codebase.InventoryLogic
 
         private void Click(PointerEventData eventData)
         {
+            if (_item == null) return;
+
             if (eventData.button == InputButton.Left)
             {
                 print("Left button");
 
-                TakeInHand();
+                PutInInventory();
             }
-            else if (eventData.button == InputButton.Right)
-            {
-                print("Right button");
+            //Работает с багом. Временно не работает.
+            //else if (eventData.button == InputButton.Right)
+            //{
+            //    print("Right button");
 
-                Drop();
-            }
+            //    Drop();
+            //}
         }
 
-        private void TakeInHand()
+        private void PutInInventory()
         {
-            _inventory.TakeInHand(_item);
+            _inventory.PutInInventory(_item);
         }
 
         private void Drop()

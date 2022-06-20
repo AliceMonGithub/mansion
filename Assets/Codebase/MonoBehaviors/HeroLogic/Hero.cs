@@ -12,26 +12,28 @@ namespace Codebase.HeroLogic
         [Space]
 
         [SerializeField] private Transform _dropPoint;
+        [SerializeField] private Transform _handPoint;
 
         public GameObject GameObject => _gameObject;
         public Transform Transform => _transform;
         public CharacterController CharacterController => _characterController;
 
         public Transform DropPoint => _dropPoint;
+        public Transform HandPoint => _handPoint;
 
         private void OnValidate()
         {
-            if(_gameObject == null)
+            if (_gameObject == null)
             {
                 _gameObject = gameObject;
             }
 
-            if(_transform == null)
+            if (_transform == null)
             {
                 _transform = transform;
             }
 
-            if(_characterController == null)
+            if (_characterController == null)
             {
                 _characterController = GetComponent<CharacterController>();
             }
