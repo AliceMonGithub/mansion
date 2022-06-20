@@ -32,11 +32,13 @@ namespace Codebase.HidingObjectLogic
                 // TODO
                 //Debug.Log("Вылез");
                 StartCoroutine(GetHiding(_hero.transform.position, _outsidePoint.position));
+                _hero.CharacterController.enabled = true;
             }
             else
             {
                 //Debug.Log("Залез");
                 StartCoroutine(GetHiding(_hero.transform.position, _insidePoint.position));
+                _hero.CharacterController.enabled = false;
             }
 
             _inside = !_inside;
