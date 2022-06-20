@@ -1194,6 +1194,7 @@ MonoBehaviour:
   - {fileID: 1991619901}
   - {fileID: 895161045}
   - {fileID: 709367793}
+  _handSlot: {fileID: 0}
   _inventory: {fileID: 1356944257}
 --- !u!114 &967410651
 MonoBehaviour:
@@ -1573,7 +1574,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1180121025550703832, guid: cf6a30500f2ffa24aa6e9d07e4b8c5c5, type: 3}
       propertyPath: _sensitivity
-      value: 200
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 1180121025550703833, guid: cf6a30500f2ffa24aa6e9d07e4b8c5c5, type: 3}
       propertyPath: _inventory
