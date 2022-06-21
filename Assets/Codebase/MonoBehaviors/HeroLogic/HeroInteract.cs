@@ -4,8 +4,10 @@ using UnityEngine;
 
 namespace Codebase.HeroLogic
 {
-    public class HeroRaycast : MonoBehaviour
+    public class HeroInteract : MonoBehaviour
     {
+        public event InteractHandler InteractButtonDown;
+        public delegate void InteractHandler();
 
         [SerializeField] private string _interactButton;
 
@@ -29,9 +31,14 @@ namespace Codebase.HeroLogic
         {
             DrawRay();
 
-            if (Input.GetButtonDown(_interactButton) && _object != null)
+            if (Input.GetButtonDown(_interactButton))
             {
-                _object.Interact(_hero);
+                InteractButtonDown?.Invoke();
+
+                if (_object != null)
+                {
+                    _object.Interact(_hero);
+                }
             }
         }
 

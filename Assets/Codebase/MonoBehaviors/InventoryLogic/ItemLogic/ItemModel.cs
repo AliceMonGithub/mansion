@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using Codebase.PhysicLogic;
+using UnityEngine;
 
 namespace Codebase.InventoryLogic
 {
     public class ItemModel : MonoBehaviour
     {
         [SerializeField] private GameObject _gameObject;
+
+        [SerializeField] private SmoothMoving _smoothMoving;
 
         public GameObject GameObject => _gameObject;
 
@@ -14,6 +17,16 @@ namespace Codebase.InventoryLogic
             {
                 _gameObject = gameObject;
             }
+
+            if(_smoothMoving == null)
+            {
+                _smoothMoving = GetComponent<SmoothMoving>();
+            }
+        }
+
+        public void Initialize(Transform movingTarget, Transform rotatingTarget)
+        {
+            _smoothMoving.Initialize(movingTarget, rotatingTarget);
         }
     }
 }
