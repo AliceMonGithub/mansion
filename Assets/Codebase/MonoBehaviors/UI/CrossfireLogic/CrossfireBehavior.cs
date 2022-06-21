@@ -15,7 +15,7 @@ namespace Codebase.CrossfireLogic
 
         [SerializeField] private Image _crossfireImage;
 
-        [SerializeField] private HeroRaycast _heroRaycast;
+        [SerializeField] private HeroInteract _heroRaycast;
 
         private void Update()
         {
@@ -38,7 +38,7 @@ namespace Codebase.CrossfireLogic
 
             if(_heroRaycast == null)
             {
-                _heroRaycast = FindObjectOfType<HeroRaycast>();
+                _heroRaycast = FindObjectOfType<HeroInteract>();
             }
         }
 

@@ -15,6 +15,13 @@ namespace Codebase.HidingObjectLogic
 
         [SerializeField] private bool _inside;
 
+        private bool _moving;
+
+        private void OnDestroy()
+        {
+            _hero.HeroInteract.InteractButtonDown -= Interact;
+        }
+
         private void OnValidate()
         {
             _time = Mathf.Clamp(_time, 0f, Mathf.Infinity);
@@ -27,37 +34,64 @@ namespace Codebase.HidingObjectLogic
 
         public void Interact()
         {
+            if (_moving) return;
+
             if (_inside)
             {
-                // TODO
-                //Debug.Log("Вылез");
-                StartCoroutine(GetHiding(_hero.transform.position, _outsidePoint.position));
-                _hero.CharacterController.enabled = true;
+                StartCoroutine(GetOut());
             }
             else
             {
-                //Debug.Log("Залез");
-                StartCoroutine(GetHiding(_hero.transform.position, _insidePoint.position));
-                _hero.CharacterController.enabled = false;
+                StartCoroutine(Hide());
             }
 
             _inside = !_inside;
         }
 
-        IEnumerator GetHiding(Vector3 startPoint, Vector3 endPoint)
+        private IEnumerator Hide()
         {
-            float time = 0f;
+            var startPosition = _hero.Transform.position;
+            var time = 0f;
+
+            _moving = true;
+
+            _hero.Disable();
 
             while (time < 1)
             {
                 time += Time.deltaTime / _time;
-                //time = time + Time.deltaTime;
-                //float percent = Mathf.Clamp01(time / duration);
 
-                _hero.Transform.position = Vector3.Lerp(startPoint, endPoint, time);
+                _hero.Transform.position = Vector3.Lerp(startPosition, _insidePoint.position, time);
 
                 yield return null;
             }
+
+            _hero.HeroInteract.InteractButtonDown += Interact;
+
+            _moving = false;
+        }
+
+        private IEnumerator GetOut()
+        {
+            var startPosition = _hero.Transform.position;
+            var time = 0f;
+
+            _moving = true;
+
+            _hero.HeroInteract.InteractButtonDown -= Interact;
+
+            while (time < 1)
+            {
+                time += Time.deltaTime / _time;
+
+                _hero.Transform.position = Vector3.Lerp(startPosition, _outsidePoint.position, time);
+
+                yield return null;
+            }
+
+            _hero.Enable();
+
+            _moving = false;
         }
     }
 }

@@ -24,6 +24,11 @@ namespace Codebase.HeroLogic
 
         [Space]
 
+        [SerializeField] private Transform _modelMovingTarget;
+        [SerializeField] private Transform _modelRotatingTarget;
+
+        [Space]
+
         [SerializeField] private InventoryBehavior _inventory;
         [SerializeField] private Hero _hero;
 
@@ -74,7 +79,9 @@ namespace Codebase.HeroLogic
         {
             _items.Remove(item);
 
-            _itemModel = _handItemFactory.Create(item.ModelPrefab, HandPoint);
+            _itemModel = _handItemFactory.Create(item.ModelPrefab, _hero);
+
+            _itemModel.Initialize(_modelMovingTarget, _modelRotatingTarget);
 
             _handItem = item;
 
