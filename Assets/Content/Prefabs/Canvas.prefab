@@ -390,8 +390,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 903f609cb0bb38243a1adcd65f3cec45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pointerEnterColor: {r: 0, g: 0, b: 0, a: 1}
-  _pointerExitColor: {r: 0, g: 0, b: 0, a: 1}
+  _pointerEnterColor: {r: 0, g: 0, b: 0, a: 0.74509805}
+  _pointerExitColor: {r: 0, g: 0, b: 0, a: 0.15686275}
   _crossfireImage: {fileID: 8673257688505174287}
   _heroRaycast: {fileID: 0}
 --- !u!1 &8673257688908465879
