@@ -1,44 +1,55 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HeroFlashLight : MonoBehaviour
 {
-    [SerializeField] private GameObject _flashLight;
+    [SerializeField] private GameObject _flashlight;
 
-    [SerializeField] private AudioClip _flashLightSound;
+    [SerializeField] private AudioSource _audioSource;
 
-    [SerializeField] private string _flashLightButton;
+    [SerializeField] private string _flashlightButton;
 
-    [SerializeField] private bool _flashLightOn;
+    private bool _flashlightEnabled;
 
-
-    private void Start()
+    private void Update()
     {
-        _flashLight.SetActive(false);
+        TryInteract();
     }
 
-    private void FlashLightControl()
+    private void OnValidate()
     {
-        if (Input.GetButtonDown(_flashLightButton))
+        _flashlightEnabled = _flashlight.activeSelf;
+
+        if(_flashlight == null)
         {
-            if (_flashLightOn == false)
-            {
-                _flashLight.SetActive(true);
-                _flashLightOn = true;
-                GetComponent<AudioSource>().PlayOneShot(_flashLightSound);
-            }
-            else
-            {
-                _flashLight.SetActive(false);
-                _flashLightOn = false;
-                GetComponent<AudioSource>().PlayOneShot(_flashLightSound);
-            }
+            _flashlight = gameObject;
+        }
+
+        if(_audioSource == null)
+        {
+            _audioSource = GetComponent<AudioSource>();
         }
     }
 
-    void Update()
+    private void TryInteract()
     {
-        FlashLightControl();
+        if (Input.GetButtonDown(_flashlightButton))
+        {
+            if (_flashlightEnabled == false)
+            {
+                _flashlight.SetActive(true);
+
+                _flashlightEnabled = true;
+
+                _audioSource.Play();
+            }
+            else
+            {
+                _flashlight.SetActive(false);
+
+                _flashlightEnabled = false;
+
+                _audioSource.Play();
+            }
+        }
     }
 }

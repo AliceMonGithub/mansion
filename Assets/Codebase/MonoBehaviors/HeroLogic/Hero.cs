@@ -68,6 +68,8 @@ namespace Codebase.HeroLogic
         public void Disable()
         {
             HeroMovement.enabled = false;
+
+            HeroMovement.Clear();
         }
     }
 }

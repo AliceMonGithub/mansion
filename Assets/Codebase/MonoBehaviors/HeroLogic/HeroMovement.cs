@@ -48,6 +48,12 @@ namespace Codebase.HeroLogic
             }
         }
 
+        public void Clear()
+        {
+            _axis = Vector2.zero;
+            _axisVelosity = Vector2.zero;
+        }
+
         private void Move()
         {
             SmoothAxis();
