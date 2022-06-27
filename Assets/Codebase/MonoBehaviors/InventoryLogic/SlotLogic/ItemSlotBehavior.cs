@@ -44,14 +44,10 @@ namespace Codebase.InventoryLogic
         {
             if (eventData.button == InputButton.Left)
             {
-                print("Left button");
-
                 TakeInHand();
             }
             else if (eventData.button == InputButton.Right)
             {
-                print("Right button");
-
                 Drop();
             }
         }
