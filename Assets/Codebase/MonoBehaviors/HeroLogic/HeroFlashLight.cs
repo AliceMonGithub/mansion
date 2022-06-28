@@ -19,12 +19,12 @@ public class HeroFlashLight : MonoBehaviour
     {
         _flashlightEnabled = _flashlight.activeSelf;
 
-        if(_flashlight == null)
+        if (_flashlight == null)
         {
             _flashlight = gameObject;
         }
 
-        if(_audioSource == null)
+        if (_audioSource == null)
         {
             _audioSource = GetComponent<AudioSource>();
         }
