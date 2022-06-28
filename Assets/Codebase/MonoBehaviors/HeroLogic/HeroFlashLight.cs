@@ -1,10 +1,11 @@
+using UltEvents;
 using UnityEngine;
 
 public class HeroFlashLight : MonoBehaviour
 {
-    [SerializeField] private GameObject _flashlight;
+    [SerializeField] private UltEvent _onInteract;
 
-    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private GameObject _flashlight;
 
     [SerializeField] private string _flashlightButton;
 
@@ -23,11 +24,6 @@ public class HeroFlashLight : MonoBehaviour
         {
             _flashlight = gameObject;
         }
-
-        if (_audioSource == null)
-        {
-            _audioSource = GetComponent<AudioSource>();
-        }
     }
 
     private void TryInteract()
@@ -40,7 +36,7 @@ public class HeroFlashLight : MonoBehaviour
 
                 _flashlightEnabled = true;
 
-                _audioSource.Play();
+                _onInteract.Invoke();
             }
             else
             {
@@ -48,7 +44,7 @@ public class HeroFlashLight : MonoBehaviour
 
                 _flashlightEnabled = false;
 
-                _audioSource.Play();
+                _onInteract.Invoke();
             }
         }
     }
