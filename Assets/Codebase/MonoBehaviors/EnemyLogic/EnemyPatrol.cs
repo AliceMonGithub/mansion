@@ -1,41 +1,47 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyPatrol : MonoBehaviour
 {
-    private NavMeshAgent _agentEnemy;
+    [SerializeField] private Transform[] _points;
 
-    [SerializeField] private Transform[] _patrolTargets;
+    [Space]
 
-    private int i;
+    [SerializeField] private NavMeshAgent _navMesh;
+    [SerializeField] private Transform _transform;
 
-    private void OnValidate()
-    {
-        if(_agentEnemy == null)
-        {
-            _agentEnemy = GetComponent<NavMeshAgent>();
-        }
-    }
-
-    private void TargetUpdate()
-    {
-        i = Random.Range(0,_patrolTargets.Length);
-    }
-
-    private void EnemyMove()
-    {
-        if (_agentEnemy.transform.position == _agentEnemy.pathEndPosition)
-        {
-            TargetUpdate();
-        }
-        _agentEnemy.SetDestination(_patrolTargets[i].position);
-    }
+    private Transform _currentPoint;
 
     private void Update()
     {
-        EnemyMove();
+        UpdatePoint();
     }
 
+    private void OnValidate()
+    {
+        if (_navMesh == null)
+        {
+            _navMesh = GetComponent<NavMeshAgent>();
+        }
+
+        if (_transform == null)
+        {
+            _transform = transform;
+        }
+    }
+
+    private void UpdatePoint()
+    {
+        if (_navMesh.transform.position == _navMesh.pathEndPosition)
+        {
+            SetRandomPoint();
+        }
+
+        _navMesh.SetDestination(_currentPoint.position);
+    }
+
+    private void SetRandomPoint()
+    {
+        _currentPoint = _points[Random.Range(0, _points.Length)];
+    }
 }

@@ -6788,11 +6788,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a09e7703c05deb42bf1b66d9c2aae22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _patrolTargets:
+  _points:
   - {fileID: 635476456}
   - {fileID: 1180464985}
   - {fileID: 1549405761}
   - {fileID: 1309453402}
+  _navMesh: {fileID: 1174415973}
+  _transform: {fileID: 1174415979}
+--- !u!4 &1174415979 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400096, guid: 412b92d4feeb9c548bfa98f62c4d1022, type: 3}
+  m_PrefabInstance: {fileID: 1976439379}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1180464984
 GameObject:
   m_ObjectHideFlags: 0
@@ -11317,7 +11324,9 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11400000, guid: 412b92d4feeb9c548bfa98f62c4d1022, type: 3}
+    - {fileID: 11400004, guid: 412b92d4feeb9c548bfa98f62c4d1022, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 412b92d4feeb9c548bfa98f62c4d1022, type: 3}
 --- !u!1 &1999393744
 GameObject:
@@ -12191,11 +12200,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a09e7703c05deb42bf1b66d9c2aae22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _patrolTargets:
+  _points:
   - {fileID: 635476456}
   - {fileID: 1180464985}
   - {fileID: 1549405761}
   - {fileID: 1309453402}
+  _navMesh: {fileID: 2113272519}
+  _transform: {fileID: 2113272521}
 --- !u!195 &2113272519
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -12218,6 +12229,11 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!4 &2113272521 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6131453452532801857, guid: cb2551d5c39ec4700b19f3b57c030da4, type: 3}
+  m_PrefabInstance: {fileID: 660383746}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2114767794
 PrefabInstance:
   m_ObjectHideFlags: 0
