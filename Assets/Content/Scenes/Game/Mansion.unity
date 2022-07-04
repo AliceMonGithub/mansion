@@ -12566,6 +12566,10 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 7070954892790051887, guid: cf6a30500f2ffa24aa6e9d07e4b8c5c5, type: 3}
+      propertyPath: _movingSmooth
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8233061512473072453, guid: cf6a30500f2ffa24aa6e9d07e4b8c5c5, type: 3}
       propertyPath: m_Name
       value: Hero
