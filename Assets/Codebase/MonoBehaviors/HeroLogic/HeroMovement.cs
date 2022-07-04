@@ -25,7 +25,7 @@ namespace Codebase.HeroLogic
             _input = input;
         }
 
-        public bool Moving => _input.Axis.sqrMagnitude != 0 && enabled;
+        public bool Moving => CharacterController.velocity.sqrMagnitude != 0;
 
         private Vector3 MoveDirection => (Transform.forward * _axis.y + Transform.right * _axis.x);
 
