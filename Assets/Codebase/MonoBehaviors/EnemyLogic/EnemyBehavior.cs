@@ -105,6 +105,18 @@ namespace Codebase.EnemyLogic
         private void OnValidate()
         {
             _visionAngle = _fieldOfView / 2;
+
+            _fieldOfView = Mathf.Clamp(_fieldOfView, 0f, Mathf.Infinity);
+            _visionRange = Mathf.Clamp(_visionRange, 0f, Mathf.Infinity);
+
+            _enemyMemory = Mathf.Clamp(_enemyMemory, 0f, Mathf.Infinity);
+
+            _rayDistance = Mathf.Clamp(_rayDistance, 0f, Mathf.Infinity);
+
+            if(_enemy == null)
+            {
+                _enemy = GetComponent<Enemy>();
+            }
         }
 
         private IEnumerator TryPlaceEndPoint(EnemyState state, EnemyState oldState)
@@ -113,11 +125,18 @@ namespace Codebase.EnemyLogic
             {
                 _state = EnemyState.Seek;
 
+                OnStateChanged?.Invoke(EnemyState.Seek, oldState);
+
                 EnemyMovement.SetMovingPoint(Target.UnderPoint.position);
 
                 yield return new WaitForSeconds(_enemyMemory);
 
-                EnemyMovement.SetMovingPoint(Target.UnderPoint.position, () => { _state = EnemyState.Patrol; });
+                EnemyMovement.SetMovingPoint(Target.UnderPoint.position, () => 
+                { 
+                    _state = EnemyState.Patrol; 
+
+                    OnStateChanged?.Invoke(EnemyState.Patrol, EnemyState.Seek); 
+                });
             }
         }
 
@@ -161,7 +180,11 @@ namespace Codebase.EnemyLogic
         {
             if(Vector3.Distance(_enemy.Transform.position, Target.UnderPoint.position) <= hearRange)
             {
+                var oldState = _state;
+
                 _state = EnemyState.Seek;
+
+                OnStateChanged?.Invoke(EnemyState.Seek, oldState);
 
                 EnemyMovement.SetMovingPoint(Target.UnderPoint.position, () => { _state = EnemyState.Patrol; });
             }
