@@ -18,6 +18,8 @@ namespace Codebase.HeroLogic
 
         [Space]
 
+        [SerializeField] private Transform _centerPoint;
+        [SerializeField] private Transform _underPoint;
         [SerializeField] private Transform _dropPoint;
         [SerializeField] private Transform _handPoint;
 
@@ -29,6 +31,8 @@ namespace Codebase.HeroLogic
         public HeroInteract HeroInteract => _heroInteract;
         public SinusoidMoving SinusoidMoving => _sinusoidMoving;
 
+        public Transform CenterPoint => _centerPoint;
+        public Transform UnderPoint => _underPoint;
         public Transform DropPoint => _dropPoint;
         public Transform HandPoint => _handPoint;
 
