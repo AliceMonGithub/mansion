@@ -12,6 +12,12 @@ namespace Codebase.EnemyLogic
 
         [Space]
 
+        [SerializeField] private float _patrolSpeed;
+        [SerializeField] private float _seekSpeed;
+        [SerializeField] private float _chaseSpeed;
+
+        [Space]
+
         [SerializeField] private Enemy _enemy;
 
         private Transform _currentPoint;
@@ -51,6 +57,28 @@ namespace Codebase.EnemyLogic
                     StopCoroutine(MoveToPoint());
                 }
             };
+
+            _enemy.EnemyBehavior.OnStateChanged += (state, oldState) =>
+            {
+                switch (state)
+                {
+                    case EnemyState.Patrol:
+
+                        Navigation.speed = _patrolSpeed;
+
+                        break;
+                    case EnemyState.Seek:
+
+                        Navigation.speed = _seekSpeed;
+
+                        break;
+                    case EnemyState.Chase:
+
+                        Navigation.speed = _chaseSpeed;
+
+                        break;
+                }
+            };
         }
 
         private void OnDisable()
@@ -64,6 +92,40 @@ namespace Codebase.EnemyLogic
                     StopCoroutine(MoveToPoint());
                 }
             };
+
+            _enemy.EnemyBehavior.OnStateChanged -= (state, oldState) =>
+            {
+                switch (state)
+                {
+                    case EnemyState.Patrol:
+
+                        Navigation.speed = _patrolSpeed;
+
+                        break;
+                    case EnemyState.Seek:
+
+                        Navigation.speed = _seekSpeed;
+
+                        break;
+                    case EnemyState.Chase:
+
+                        Navigation.speed = _chaseSpeed;
+
+                        break;
+                }
+            };
+        }
+
+        private void OnValidate()
+        {
+            _patrolSpeed = Mathf.Clamp(_patrolSpeed, 0f, Mathf.Infinity);
+            _seekSpeed = Mathf.Clamp(_seekSpeed, 0f, Mathf.Infinity);
+            _chaseSpeed = Mathf.Clamp(_chaseSpeed, 0f, Mathf.Infinity);
+
+            if(_enemy == null)
+            {
+                _enemy = GetComponent<Enemy>();
+            }
         }
 
         public void SetMovingPoint(Vector3 movingPoint, Action onFinishAction = null)
