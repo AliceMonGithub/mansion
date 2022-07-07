@@ -37,6 +37,10 @@ namespace Codebase.DoorLogic
                     {
                         KickDoor();
                     }
+
+                    _opened = !_opened;
+
+                    return;
                 }
 
                 Open();
