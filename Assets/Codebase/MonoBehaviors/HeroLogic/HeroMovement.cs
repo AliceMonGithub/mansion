@@ -1,4 +1,5 @@
 using Codebase.Services.InputService;
+using UnityEditor;
 using UnityEngine;
 using Zenject;
 
@@ -7,9 +8,28 @@ namespace Codebase.HeroLogic
     [RequireComponent(typeof(CharacterController))]
     public class HeroMovement : MonoBehaviour
     {
+        public event SoundHandler OnStepSound;
+        public delegate void SoundHandler(float hearRange);
+
         [Header("Properties")]
         [SerializeField] private float _speed;
         [SerializeField] private float _smooth;
+
+        [Header("Sounds")]
+        [SerializeField] private AudioClip[] _stepsSound;
+        [SerializeField] private AudioSource _audioSource;
+
+        [Space]
+
+        [SerializeField] private float _stepsFrequency;
+
+        [Space]
+
+        [SerializeField] private float _stepsVolumeRange;
+
+        [Space]
+
+        [SerializeField] private float _enableStrength;
 
         [Header("Components")]
         [SerializeField] private Hero _hero;
@@ -19,22 +39,37 @@ namespace Codebase.HeroLogic
         private Vector2 _axis;
         private Vector2 _axisVelosity;
 
+        private float _stepTime;
+
         [Inject]
         private void Construct(MovementInput input)
         {
             _input = input;
         }
 
-        public bool Moving => CharacterController.velocity.sqrMagnitude != 0;
+        public float Velosity => (MoveDirection * _speed).magnitude / _speed;
 
         private Vector3 MoveDirection => (Transform.forward * _axis.y + Transform.right * _axis.x);
+        private AudioClip StepSound => _stepsSound[Random.Range(0, _stepsSound.Length)];
 
-        public Transform Transform => _hero.Transform;
-        public CharacterController CharacterController => _hero.CharacterController;
+        private Transform Transform => _hero.Transform;
+        private Transform UnderPoint => _hero.UnderPoint;
+        private CharacterController CharacterController => _hero.CharacterController;
 
         private void Update()
         {
             Move();
+
+            TryPlayStepSound();
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            if (UnderPoint == null) return;
+
+            Handles.color = Color.white;
+
+            Handles.DrawWireArc(UnderPoint.position, Vector3.up, Vector3.forward, 360, _stepsVolumeRange);
         }
 
         private void OnValidate()
@@ -52,6 +87,25 @@ namespace Codebase.HeroLogic
         {
             _axis = Vector2.zero;
             _axisVelosity = Vector2.zero;
+        }
+
+        private void TryPlayStepSound()
+        {
+            if (Velosity >= _enableStrength)
+            {
+                _stepTime += Time.deltaTime;
+
+                if (_stepTime >= _stepsFrequency)
+                {
+                    _audioSource.pitch = Random.Range(0.9f, 1.1f);
+
+                    _audioSource.PlayOneShot(StepSound);
+
+                    OnStepSound?.Invoke(_stepsVolumeRange);
+
+                    _stepTime = 0f;
+                }
+            }
         }
 
         private void Move()

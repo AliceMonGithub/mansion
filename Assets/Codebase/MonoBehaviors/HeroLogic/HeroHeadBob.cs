@@ -6,24 +6,21 @@ namespace Codebase.HeroLogic
     public class HeroHeadBob : MonoBehaviour
     {
         [Header("Components")]
-        [SerializeField] private SinusoidMoving _sinusoidMoving;
-        [SerializeField] private HeroMovement _heroMovement;
+        [SerializeField] private Hero _hero;
+
+        public SinusoidMoving SinusoidMoving => _hero.SinusoidMoving;
+        public HeroMovement HeroMovement => _hero.HeroMovement;
 
         private void Update()
         {
-            _sinusoidMoving.Enabled = _heroMovement.Moving;
+            SinusoidMoving.ExtraStrength = HeroMovement.Velosity;
         }
 
         private void OnValidate()
         {
-            if (_heroMovement == null)
+            if (_hero == null)
             {
-                _heroMovement = GetComponent<HeroMovement>();
-            }
-
-            if (_sinusoidMoving == null)
-            {
-                _sinusoidMoving = GetComponentInChildren<SinusoidMoving>();
+                _hero = GetComponent<Hero>();
             }
         }
     }

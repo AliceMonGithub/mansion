@@ -1,4 +1,5 @@
 ﻿using Codebase.HeroLogic;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -15,9 +16,10 @@ namespace Codebase.EnemyLogic
 
         private Transform _currentPoint;
 
-        private Vector3 _lastEndVisionPoint;
+        private Vector3 _movingPoint;
+        private Action _onFinishAction;
 
-        private bool _movingToEndPoint;
+        private bool _movingToPoint;
 
         private Hero Target => _enemy.Target;
         private EnemyState State => _enemy.State;
@@ -40,68 +42,57 @@ namespace Codebase.EnemyLogic
 
         private void OnEnable()
         {
-            _enemy.EnemyBehavior.OnTargetMissed += (EndVisionPoint) =>
-            {
-                _lastEndVisionPoint = EndVisionPoint;
-
-                StartCoroutine(MoveToEndPoint());
-            };
-
             _enemy.EnemyBehavior.OnStateChanged += (state, oldState) =>
             {
                 if (state == EnemyState.Chase)
                 {
-                    _movingToEndPoint = false;
+                    _movingToPoint = false;
 
-                    StopCoroutine(MoveToEndPoint());
+                    StopCoroutine(MoveToPoint());
                 }
             };
         }
 
         private void OnDisable()
         {
-            _enemy.EnemyBehavior.OnTargetMissed -= (EndVisionPoint) =>
-            {
-                _lastEndVisionPoint = EndVisionPoint;
-
-                StartCoroutine(MoveToEndPoint());
-            };
-
             _enemy.EnemyBehavior.OnStateChanged -= (state, oldState) =>
             {
                 if (state == EnemyState.Chase)
                 {
-                    _movingToEndPoint = false;
+                    _movingToPoint = false;
 
-                    StopCoroutine(MoveToEndPoint());
+                    StopCoroutine(MoveToPoint());
                 }
             };
         }
 
-        private IEnumerator MoveToEndPoint()
+        public void SetMovingPoint(Vector3 movingPoint, Action onFinishAction = null)
         {
-            _movingToEndPoint = true;
+            _movingPoint = movingPoint;
+            _onFinishAction = onFinishAction;
 
-            Navigation.SetDestination(_lastEndVisionPoint);
+            StartCoroutine(MoveToPoint());
+        }
+
+        private IEnumerator MoveToPoint()
+        {
+            _movingToPoint = true;
+
+            Navigation.SetDestination(_movingPoint);
 
             while(_enemy.UnderPoint.position != Navigation.pathEndPosition)
             {
                 yield return null;
             }
 
-            _movingToEndPoint = false;
-        }
+            _movingToPoint = false;
 
-        public void UpdateEndPoint(Vector3 point)
-        {
-            _lastEndVisionPoint = point;
-
-            Navigation.SetDestination(_lastEndVisionPoint);
+            _onFinishAction?.Invoke();
         }
 
         private void UpdatePoint()
         {
-            if (_movingToEndPoint) return;
+            if (_movingToPoint) return;
 
             if (UnderPoint.position == Navigation.pathEndPosition)
             {
@@ -123,7 +114,7 @@ namespace Codebase.EnemyLogic
 
         private void SetRandomPoint()
         {
-            _currentPoint = _points[Random.Range(0, _points.Length)];
+            _currentPoint = _points[UnityEngine.Random.Range(0, _points.Length)];
         }
     }
 }
