@@ -17,7 +17,7 @@ namespace Codebase.DoorLogic
 
         public override void Interact(object sender)
         {
-            _doorBehavior.Interact();
+            _doorBehavior.Interact(sender);
         }
     }
 }
