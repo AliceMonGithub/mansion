@@ -97,7 +97,7 @@ namespace Codebase.HeroLogic
 
                 if (_stepTime >= _stepsFrequency)
                 {
-                    _audioSource.pitch = Random.Range(0.9f, 1.1f);
+                    _audioSource.pitch = Random.Range(0.87f, 1.13f);
 
                     _audioSource.PlayOneShot(StepSound);
 
