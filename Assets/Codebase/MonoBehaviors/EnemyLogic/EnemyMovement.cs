@@ -23,12 +23,17 @@ namespace Codebase.EnemyLogic
         private Transform _currentPoint;
 
         private Vector3 _movingPoint;
+
         private Action _onFinishAction;
+
+        private float _velosity;
 
         private bool _movingToPoint;
 
         private Hero Target => _enemy.Target;
         private EnemyState State => _enemy.State;
+
+        public float Velosity => _velosity;
 
         private Transform UnderPoint => _enemy.UnderPoint;
         private NavMeshAgent Navigation => _enemy.Navigation;
@@ -66,15 +71,21 @@ namespace Codebase.EnemyLogic
 
                         Navigation.speed = _patrolSpeed;
 
+                        _velosity = _patrolSpeed;
+
                         break;
                     case EnemyState.Seek:
 
                         Navigation.speed = _seekSpeed;
 
+                        _velosity = _seekSpeed;
+
                         break;
                     case EnemyState.Chase:
 
                         Navigation.speed = _chaseSpeed;
+
+                        _velosity = _chaseSpeed;
 
                         break;
                 }

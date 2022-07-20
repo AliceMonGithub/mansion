@@ -38,6 +38,8 @@ namespace Codebase.EnemyLogic
         [Header("Components")]
         [SerializeField] private Enemy _enemy;
 
+        [SerializeField] private AudioSource _onChaseSound;
+        [SerializeField] private AudioSource _chaseSound;
         [SerializeField] private EnemyState _state;
 
         private float _visionAngle;
@@ -87,6 +89,13 @@ namespace Codebase.EnemyLogic
             OnStateChanged += (state, oldState) =>
             {
                 StartCoroutine(TryPlaceEndPoint(state, oldState));
+
+                if (state == EnemyState.Chase && oldState == EnemyState.Patrol)
+                {
+                    print($"State: {state}; OldState: {oldState}");
+
+                    _onChaseSound.Play();
+                }
             };
 
             HeroMovement.OnStepSound += TryHearStep;
