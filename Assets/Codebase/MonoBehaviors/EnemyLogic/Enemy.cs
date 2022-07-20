@@ -13,6 +13,7 @@ namespace Codebase.EnemyLogic
 
         [SerializeField] private EnemyBehavior _enemyBehavior;
         [SerializeField] private EnemyMovement _enemyMovement;
+        [SerializeField] private EnemyAnimator _enemyAnimator;
 
         [Space]
 
@@ -23,6 +24,8 @@ namespace Codebase.EnemyLogic
         
         public EnemyState State => _enemyBehavior.State;
 
+        public float Velosity => _enemyMovement.Velosity;
+
         public Transform UnderPoint => _underPoint;
 
         public Transform Transform => _transform;
@@ -30,6 +33,7 @@ namespace Codebase.EnemyLogic
 
         public EnemyBehavior EnemyBehavior => _enemyBehavior;
         public EnemyMovement EnemyMovement => _enemyMovement;
+        public EnemyAnimator EnemyAnimator => _enemyAnimator;
 
         private void OnValidate()
         {
