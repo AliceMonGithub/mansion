@@ -2,12 +2,17 @@
 using UnityEngine;
 using UniRx;
 using UnityEngine.UI;
+using Codebase.HeroLogic;
 
 namespace Codebase.InventoryLogic
 {
     public class ItemSlotView : MonoBehaviour
     {
         [SerializeField] private Image _image;
+
+        [Space]
+
+        [SerializeField] private HeroInventory _inventory;
 
         private void OnValidate()
         {
@@ -26,7 +31,7 @@ namespace Codebase.InventoryLogic
         {
             _image.enabled = false;
             
-            if(item != null)
+            if(item != null && item != _inventory.HandItem)
             {
                 _image.sprite = item.Image;
 

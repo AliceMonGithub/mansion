@@ -13,6 +13,7 @@ namespace Codebase.HeroLogic
         [Space]
 
         [SerializeField] private HeroMovement _heroMovement;
+        [SerializeField] private HeroInventory _heroInventory;
         [SerializeField] private HeroInteract _heroInteract;
         [SerializeField] private SinusoidMoving _sinusoidMoving;
 
@@ -28,6 +29,7 @@ namespace Codebase.HeroLogic
         public CharacterController CharacterController => _characterController;
 
         public HeroMovement HeroMovement => _heroMovement;
+        public HeroInventory Inventory => _heroInventory;
         public HeroInteract HeroInteract => _heroInteract;
         public SinusoidMoving SinusoidMoving => _sinusoidMoving;
 
@@ -56,6 +58,11 @@ namespace Codebase.HeroLogic
             if(_heroMovement == null)
             {
                 _heroMovement = GetComponent<HeroMovement>();
+            }
+
+            if(_heroInventory == null)
+            {
+                _heroInventory = GetComponent<HeroInventory>();
             }
 
             if(_sinusoidMoving == null)
