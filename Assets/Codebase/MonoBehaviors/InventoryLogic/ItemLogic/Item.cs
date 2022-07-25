@@ -17,6 +17,9 @@ namespace Codebase.InventoryLogic
 
         [SerializeField] private ItemDrop _dropPrefab;
         [SerializeField] private ItemModel _itemModel;
+
+        public ItemType ItemType;
+        public int ItemIndex;
         
         public string Name => _name;
         public string Description => _description;

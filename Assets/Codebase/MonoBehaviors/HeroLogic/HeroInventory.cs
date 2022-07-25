@@ -41,9 +41,15 @@ namespace Codebase.HeroLogic
         public List<Item> Items => _items;
 
         public Item HandItem => _handItem;
+        public ItemType HandItemType => _handItem.ItemType;
 
         public Transform DropPoint => _hero.DropPoint;
         public Transform HandPoint => _hero.HandPoint;
+
+        private void Awake()
+        {
+
+        }
 
         private void Update()
         {
@@ -75,9 +81,49 @@ namespace Codebase.HeroLogic
             ItemsCountChanged?.Invoke(_items);
         }
 
+        public void RemoveItem(Item item)
+        {
+            if (item == _handItem)
+            {
+                Destroy(_itemModel.GameObject);
+
+                _handItem = null;
+
+                OnHandItemChanged?.Invoke(_handItem);
+            }
+
+            _items.Remove(item);
+
+            OnDropItem?.Invoke(item);
+
+            ItemsCountChanged?.Invoke(_items);
+        }
+
+        public void DropItem(Item item)
+        {
+            if (item == _handItem)
+            {
+                Destroy(_itemModel.GameObject);
+
+                _handItem = null;
+
+                OnHandItemChanged?.Invoke(_handItem);
+            }
+
+            _items.Remove(item);
+
+            var drop = _itemDropFactory.Create(item.DropPrefab, DropPoint.position);
+
+            drop.Initialize(item, this);
+
+            OnDropItem?.Invoke(item);
+
+            ItemsCountChanged?.Invoke(_items);
+        }
+
         public void TakeInHand(Item item)
         {
-            _items.Remove(item);
+            // _items.Remove(item);
 
             _itemModel = _handItemFactory.Create(item.ModelPrefab, _hero);
 
@@ -92,26 +138,13 @@ namespace Codebase.HeroLogic
 
         public void PutInInventory(Item item)
         {
-            _items.Add(item);
+            // _items.Add(item);
 
             Destroy(_itemModel.GameObject);
 
             _handItem = null;
 
             OnHandItemChanged?.Invoke(_handItem);
-
-            ItemsCountChanged?.Invoke(_items);
-        }
-
-        public void DropItem(Item item)
-        {
-            _items.Remove(item);
-
-            var drop = _itemDropFactory.Create(item.DropPrefab, DropPoint.position);
-
-            drop.Initialize(item, this);
-
-            OnDropItem?.Invoke(item);
 
             ItemsCountChanged?.Invoke(_items);
         }

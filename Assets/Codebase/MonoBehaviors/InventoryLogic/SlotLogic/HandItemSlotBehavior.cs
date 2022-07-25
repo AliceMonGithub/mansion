@@ -46,17 +46,13 @@ namespace Codebase.InventoryLogic
 
             if (eventData.button == InputButton.Left)
             {
-                print("Left button");
-
                 PutInInventory();
             }
-            //Работает с багом. Временно не работает.
-            //else if (eventData.button == InputButton.Right)
-            //{
-            //    print("Right button");
 
-            //    Drop();
-            //}
+            else if (eventData.button == InputButton.Right)
+            {
+                Drop();
+            }
         }
 
         private void PutInInventory()
