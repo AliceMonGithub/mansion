@@ -12,13 +12,13 @@ namespace Codebase.MinigamesLogic.Chess
         {
             Hero hero = sender as Hero;
             Item handItem = hero.Inventory.HandItem;
-
+            
             if(hero && handItem != null)
             {
                 if(handItem.ItemType == ItemType.ChessPiece)
                 {
                     Instantiate(handItem.ItemPrefab, _placingPoints[handItem.ItemIndex]);
-
+                    
                     hero.Inventory.RemoveItem(hero.Inventory.HandItem);
                 }
             }
