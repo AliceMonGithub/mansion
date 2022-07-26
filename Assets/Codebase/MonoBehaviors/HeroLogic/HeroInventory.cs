@@ -35,7 +35,7 @@ namespace Codebase.HeroLogic
         private ItemDropFactory _itemDropFactory = new ItemDropFactory();
         private HandItemFactory _handItemFactory = new HandItemFactory();
 
-        private ItemModel _itemModel;
+        private HandItem _itemModel;
         private Item _handItem;
 
         public List<Item> Items => _items;

@@ -5,9 +5,9 @@ using Zenject;
 
 namespace Codebase.Factories
 {
-    public class HandItemFactory : IFactory<ItemModel, Hero, ItemModel>
+    public class HandItemFactory : IFactory<HandItem, Hero, HandItem>
     {
-        public ItemModel Create(ItemModel prefab, Hero hero)
+        public HandItem Create(HandItem prefab, Hero hero)
         {
             return Object.Instantiate(prefab, hero.Transform.position, Quaternion.identity);
         }

@@ -16,7 +16,8 @@ namespace Codebase.InventoryLogic
         [Space]
 
         [SerializeField] private ItemDrop _dropPrefab;
-        [SerializeField] private ItemModel _itemModel;
+        [SerializeField] private HandItem _handItemPrefab;
+        [SerializeField] private Transform _itemPrefab;
 
         public ItemType ItemType;
         public int ItemIndex;
@@ -27,6 +28,7 @@ namespace Codebase.InventoryLogic
         public Sprite Image => _image;
 
         public ItemDrop DropPrefab => _dropPrefab;
-        public ItemModel ModelPrefab => _itemModel;
+        public HandItem ModelPrefab => _handItemPrefab;
+        public Transform ItemPrefab => _itemPrefab;
     }
 }

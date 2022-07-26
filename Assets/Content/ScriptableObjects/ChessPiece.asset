@@ -16,5 +16,7 @@ MonoBehaviour:
   _description: 
   _image: {fileID: 21300000, guid: b71b7a1a3bb284b498903364d99c3cd7, type: 3}
   _dropPrefab: {fileID: 8802363489125197341, guid: b69e3ffb69a7e0842ae03702315e8374, type: 3}
-  _itemModel: {fileID: 926745692353654982, guid: c29e02bee5c58324faca05b2604f1041, type: 3}
-  ItemType: {fileID: 0}
+  _handItemPrefab: {fileID: 926745692353654982, guid: c29e02bee5c58324faca05b2604f1041, type: 3}
+  _itemPrefab: {fileID: 1400673487288473572, guid: acd1464e8fd823b4ea3e70c673006b40, type: 3}
+  ItemType: 1
+  ItemIndex: 3
