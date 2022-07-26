@@ -17,6 +17,8 @@ namespace Codebase.MinigamesLogic.Chess
             {
                 if(handItem.ItemType == ItemType.ChessPiece)
                 {
+                    Instantiate(handItem.ItemPrefab, _placingPoints[handItem.ItemIndex]);
+
                     hero.Inventory.RemoveItem(hero.Inventory.HandItem);
                 }
             }
