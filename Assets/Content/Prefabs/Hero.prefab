@@ -657,6 +657,7 @@ MonoBehaviour:
   _transform: {fileID: 8233061512473072458}
   _characterController: {fileID: 8233061512473072457}
   _heroMovement: {fileID: 8233061512473072456}
+  _heroInventory: {fileID: 8233061512473072462}
   _heroInteract: {fileID: 2636031774721244965}
   _sinusoidMoving: {fileID: 7070954892790051887}
   _centerPoint: {fileID: 2028220446165729436}
@@ -693,6 +694,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 7
   _smooth: 0.14
+  _fallSpeed: 10
   _stepsSound:
   - {fileID: 8300000, guid: dfcf130f90fd11848892c6562023dea2, type: 3}
   _audioSource: {fileID: 3870956005067325403}
