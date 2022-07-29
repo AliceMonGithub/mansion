@@ -15,6 +15,10 @@ namespace Codebase.HeroLogic
         [SerializeField] private float _speed;
         [SerializeField] private float _smooth;
 
+        [Space]
+
+        [SerializeField] private float _fallSpeed;
+
         [Header("Sounds")]
         [SerializeField] private AudioClip[] _stepsSound;
         [SerializeField] private AudioSource _audioSource;
@@ -40,6 +44,7 @@ namespace Codebase.HeroLogic
         private Vector2 _axisVelosity;
 
         private float _stepTime;
+        private float _gravity;
 
         [Inject]
         private void Construct(MovementInput input)
@@ -58,6 +63,7 @@ namespace Codebase.HeroLogic
 
         private void Update()
         {
+            Gravity();
             Move();
 
             TryPlayStepSound();
@@ -115,9 +121,19 @@ namespace Codebase.HeroLogic
             MoveHero();
         }
 
+        private void Gravity()
+        {
+            _gravity += _fallSpeed * Time.deltaTime;
+
+            if(CharacterController.isGrounded)
+            {
+                _gravity = 0;
+            }
+        }
+
         private void MoveHero()
         {
-            var moveVelosity = _speed * Time.deltaTime * MoveDirection;
+            var moveVelosity = _speed * Time.deltaTime * MoveDirection + Vector3.down * _gravity;
 
             CharacterController.Move(moveVelosity);
         }
