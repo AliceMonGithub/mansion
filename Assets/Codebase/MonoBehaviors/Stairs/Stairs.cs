@@ -97,14 +97,14 @@ namespace Codebase.StairsLogic
 
             if(_movingUp)
             {
-                if (Vector3.Distance(_hero.CenterPoint.position, _upperPoint.position) <= 1f)
+                if (Vector3.Distance(_hero.CenterPoint.position, _upperPoint.position) <= 1.7f)
                 {
                     StartCoroutine(MoveToSafeZone());
                 }
             }
             else
             {
-                if (Vector3.Distance(_hero.CenterPoint.position, _underPoint.position) <= 1f)
+                if (Vector3.Distance(_hero.CenterPoint.position, _underPoint.position) <= 1.7f)
                 {
                     StartCoroutine(MoveToSafeZone());
                 }
