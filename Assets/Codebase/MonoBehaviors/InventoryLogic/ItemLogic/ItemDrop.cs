@@ -10,11 +10,6 @@ namespace Codebase.InventoryLogic
 
         [Space]
 
-        [SerializeField] private ItemType _itemType;
-        [SerializeField] private int _index;
-
-        [Space]
-
         [SerializeField] private HeroInventory _heroInventory;
 
         [Space]
@@ -23,12 +18,12 @@ namespace Codebase.InventoryLogic
 
         private void OnValidate()
         {
-            if(_gameObject == null)
+            if (_gameObject == null)
             {
                 _gameObject = gameObject;
             }
 
-            if(_heroInventory == null)
+            if (_heroInventory == null)
             {
                 _heroInventory = FindObjectOfType<HeroInventory>();
             }
@@ -36,9 +31,6 @@ namespace Codebase.InventoryLogic
 
         public override void Interact(object sender)
         {
-            _item.ItemType = _itemType;
-            _item.ItemIndex = _index;
-
             _heroInventory.AddItem(_item);
 
             Destroy(_gameObject);

@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 1400673487288473572}
   - component: {fileID: 2657100178735765569}
   - component: {fileID: 232812521382014091}
-  - component: {fileID: 3623078742175243983}
+  - component: {fileID: 926745692353654982}
   - component: {fileID: 7799220055427827191}
   m_Layer: 0
-  m_Name: GoldBarHand
+  m_Name: ChessPieceHand 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1746237430904868190}
   m_LocalRotation: {x: -0.7071068, y: -0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.40000013, z: 0.20000006}
+  m_LocalScale: {x: 1, y: 1, z: 1.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -41,7 +41,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1746237430904868190}
-  m_Mesh: {fileID: -5495902117074765545, guid: 959475fb0d593f84dad7c96e20341f35, type: 3}
+  m_Mesh: {fileID: -2080375642655452318, guid: e9675679bd9d29c46a3bd67e21fd09ca, type: 3}
 --- !u!23 &232812521382014091
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3b687375ad6c982448a87850eae87ba9, type: 2}
+  - {fileID: 5629084884208175553, guid: e9675679bd9d29c46a3bd67e21fd09ca, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83,7 +83,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3623078742175243983
+--- !u!114 &926745692353654982
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

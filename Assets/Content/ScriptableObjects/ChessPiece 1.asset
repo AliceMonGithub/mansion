@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8854d82a2f173e45b9768985d900f78, type: 3}
-  m_Name: ChessPiece
+  m_Name: ChessPiece 1
   m_EditorClassIdentifier: 
   _name: Chess piece
   _description: 
   _image: {fileID: 21300000, guid: b71b7a1a3bb284b498903364d99c3cd7, type: 3}
-  _dropPrefab: {fileID: 8802363489125197341, guid: b69e3ffb69a7e0842ae03702315e8374, type: 3}
-  _handItemPrefab: {fileID: 926745692353654982, guid: c29e02bee5c58324faca05b2604f1041, type: 3}
-  _itemPrefab: {fileID: 1400673487288473572, guid: acd1464e8fd823b4ea3e70c673006b40, type: 3}
+  _dropPrefab: {fileID: 8802363489125197341, guid: 99594b2f0f26e1e40b8cd128994d2ae6, type: 3}
+  _handItemPrefab: {fileID: 926745692353654982, guid: bd1ad3278c14c96449ec75a4ac3a85e2, type: 3}
+  _itemPrefab: {fileID: 1400673487288473572, guid: 0c578b1e54b02474cb0dace2d16a816f, type: 3}
   ItemType: 1
-  ItemIndex: 3
+  ItemIndex: 0
