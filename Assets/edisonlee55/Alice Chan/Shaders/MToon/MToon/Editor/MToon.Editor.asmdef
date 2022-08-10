@@ -1,0 +1,18 @@
+{
+    "name": "MToon.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:f5ba4fcbf1710284bbcb788a91861ef6"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
