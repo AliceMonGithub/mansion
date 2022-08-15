@@ -8,11 +8,14 @@ namespace Codebase.HeroLogic
     [RequireComponent(typeof(CharacterController))]
     public class HeroMovement : MonoBehaviour
     {
+        private const string RunBind = "Run";
+
         public event SoundHandler OnStepSound;
         public delegate void SoundHandler(float hearRange);
 
         [Header("Properties")]
-        [SerializeField] private float _speed;
+        [SerializeField] private float _walkSpeed;
+        [SerializeField] private float _runSpeed;
         [SerializeField] private float _smooth;
 
         [Space]
@@ -52,7 +55,9 @@ namespace Codebase.HeroLogic
             _input = input;
         }
 
-        public float Velosity => (MoveDirection * _speed).magnitude / _speed;
+        public float Velosity => (MoveDirection * _walkSpeed).magnitude / _walkSpeed;
+
+        public bool Running => Input.GetButton(RunBind);
 
         private Vector3 MoveDirection => (Transform.forward * _axis.y + Transform.right * _axis.x);
         private AudioClip StepSound => _stepsSound[Random.Range(0, _stepsSound.Length)];
@@ -80,7 +85,7 @@ namespace Codebase.HeroLogic
 
         private void OnValidate()
         {
-            _speed = Mathf.Clamp(_speed, 0, Mathf.Infinity);
+            _walkSpeed = Mathf.Clamp(_walkSpeed, 0, Mathf.Infinity);
             _smooth = Mathf.Clamp(_smooth, 0, Mathf.Infinity);
 
             if (_hero == null)
@@ -116,9 +121,11 @@ namespace Codebase.HeroLogic
 
         private void Move()
         {
+            float speed = Input.GetButton(RunBind) ? _runSpeed : _walkSpeed;
+
             SmoothAxis();
 
-            MoveHero();
+            MoveHero(speed);
         }
 
         private void Gravity()
@@ -131,9 +138,9 @@ namespace Codebase.HeroLogic
             }
         }
 
-        private void MoveHero()
+        private void MoveHero(float speed)
         {
-            var moveVelosity = _speed * Time.deltaTime * MoveDirection + Vector3.down * _gravity;
+            Vector3 moveVelosity = speed * Time.deltaTime * MoveDirection + Vector3.down * _gravity;
 
             CharacterController.Move(moveVelosity);
         }

@@ -5,6 +5,9 @@ namespace Codebase.HeroLogic
 {
     public class HeroHeadBob : MonoBehaviour
     {
+        [Header("Properties")]
+        [SerializeField] private float _runMultiply;
+
         [Header("Components")]
         [SerializeField] private Hero _hero;
 
@@ -13,7 +16,9 @@ namespace Codebase.HeroLogic
 
         private void Update()
         {
-            SinusoidMoving.ExtraStrength = HeroMovement.Velosity;
+            float multiply = _hero.HeroMovement.Running ? _runMultiply : 1;
+
+            print(HeroMovement.Velosity);
         }
 
         private void OnValidate()
