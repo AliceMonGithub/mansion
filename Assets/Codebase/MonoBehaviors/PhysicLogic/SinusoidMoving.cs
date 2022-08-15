@@ -14,7 +14,7 @@ namespace Codebase.PhysicLogic
         private Vector3 _startPosition;
         private float _timer;
 
-        public float ExtraStrength { get; set; }
+        public float ExtraSpeed { get; set; }
 
         private void Start()
         {
@@ -25,9 +25,9 @@ namespace Codebase.PhysicLogic
         {
             var newPosition = _startPosition;
 
-            _timer += Time.deltaTime * _movingSpeed;
+            _timer += Time.deltaTime * _movingSpeed * ExtraSpeed;
 
-            newPosition.y += Mathf.Sin(_timer) * _movingStrength * ExtraStrength;
+            newPosition.y += Mathf.Sin(_timer) * _movingStrength;
 
             _transform.localPosition = newPosition;
         }
