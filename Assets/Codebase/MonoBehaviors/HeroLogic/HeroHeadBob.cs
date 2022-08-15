@@ -6,7 +6,7 @@ namespace Codebase.HeroLogic
     public class HeroHeadBob : MonoBehaviour
     {
         [Header("Properties")]
-        [SerializeField] private float _runMultiply;
+        [SerializeField] private float _runSpeed;
 
         [Header("Components")]
         [SerializeField] private Hero _hero;
@@ -16,9 +16,10 @@ namespace Codebase.HeroLogic
 
         private void Update()
         {
-            float multiply = _hero.HeroMovement.Running ? _runMultiply : 1;
+            float speed = _hero.HeroMovement.Running ? _runSpeed : 12;
 
-            print(HeroMovement.Velosity);
+            SinusoidMoving.ExtraSpeed = speed;
+            SinusoidMoving.Velosity = _hero.HeroMovement.Velosity;
         }
 
         private void OnValidate()
