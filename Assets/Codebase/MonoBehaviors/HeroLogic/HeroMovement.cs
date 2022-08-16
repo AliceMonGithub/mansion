@@ -1,3 +1,4 @@
+using Codebase.CameraLogic;
 using Codebase.Services.InputService;
 using UnityEditor;
 using UnityEngine;
@@ -22,6 +23,11 @@ namespace Codebase.HeroLogic
 
         [SerializeField] private float _fallSpeed;
 
+        [Space]
+
+        [SerializeField] private int _walkFOV;
+        [SerializeField] private int _runFOV;
+
         [Header("Sounds")]
         [SerializeField] private AudioClip[] _stepsSound;
         [SerializeField] private AudioSource _audioSource;
@@ -40,6 +46,10 @@ namespace Codebase.HeroLogic
 
         [Header("Components")]
         [SerializeField] private Hero _hero;
+
+        [Space]
+
+        [SerializeField] private DynamicFOV _dynamicFOV;
 
         private MovementInput _input;
 
@@ -72,6 +82,7 @@ namespace Codebase.HeroLogic
             Move();
 
             TryPlayStepSound();
+            SetFOV();
         }
 
         private void OnDrawGizmosSelected()
@@ -126,6 +137,11 @@ namespace Codebase.HeroLogic
             SmoothAxis();
 
             MoveHero(speed);
+        }
+
+        private void SetFOV()
+        {
+            _dynamicFOV.FOV = Running ? _runFOV : _walkFOV;
         }
 
         private void Gravity()
