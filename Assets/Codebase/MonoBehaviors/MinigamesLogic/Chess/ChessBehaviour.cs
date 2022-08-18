@@ -1,11 +1,16 @@
 ﻿using Codebase.HeroLogic;
 using Codebase.InventoryLogic;
+using UltEvents;
 using UnityEngine;
 
 namespace Codebase.MinigamesLogic.Chess
 {
     public class ChessBehaviour : MonoBehaviour
     {
+        [SerializeField] private UltEvent _onAllPlaced;
+
+        [Space]
+
         [SerializeField] private Transform[] _placingPoints;
 
         private int _placedCount;
@@ -27,7 +32,7 @@ namespace Codebase.MinigamesLogic.Chess
 
                     if(_placedCount == _placingPoints.Length)
                     {
-                        print("All placed");
+                        _onAllPlaced.Invoke();
                     }
                 }
             }
